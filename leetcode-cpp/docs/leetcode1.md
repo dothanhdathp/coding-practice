@@ -41,7 +41,39 @@ Output: [0,1]
 
 ## Hạn chế
 
-$2$ <= **nums.length** <= $10^4$
--109 <= **nums[i]** <= 109
-$-10^9$ <= **target** <= $10^9$
-Only one valid answer exists.
+- $2 \leqq nums.length \leqq 10^4$
+- $-10^9 \leqq nums[i] \leqq 10^9$
+- $-10^9 \leqq target \leqq 10^9$
+- **Chỉ có một câu trả lời hợp lệ tồn tại.**
+
+---
+
+## Giải Thuật
+
+Ở đây sử dụng **unordered_map** để giải
+
+1. Với mỗi số đọc được từ trong dữ liệu đầu vào, ví dụ giá trị là `a`
+1. Tính `b=target-a` và lưu vào `unordered_map` cặp `{b,index}`
+1. Sau đó với số `a'` tiếp theo, tính `b'`
+1. Nếu `b'` tồn tại trong bảng (`b' == b`), trả ra cặp của **vị trị hiện tại** với vị trí được lưu tại `b` trong `unordered_map`.
+
+---
+
+## Code
+
+```cpp
+std::vector<int> twoSum(std::vector<int>& nums, int target) {
+    std::unordered_map<int, int> umap;
+    for(int i{0};i<nums.size();++i)
+    {
+        auto it = umap.find(nums[i]);
+        if(it!=umap.end())
+        {
+            return {i, it->second};
+        } else {
+            umap[target-nums[i]]=i;
+        }
+    }
+    return {};
+}
+```
