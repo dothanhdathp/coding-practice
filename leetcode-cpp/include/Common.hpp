@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <stack>
 #include <functional>
 
 #define RED     "\033[31m"
@@ -10,6 +11,14 @@
 #define BOLD    "\033[1m"
 
 #define COLOR_PRINT(C, ftm, ...) printf(C ftm "\n" RESET, ##__VA_ARGS__);
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
 namespace test {
     /**
